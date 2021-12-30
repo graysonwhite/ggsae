@@ -1,0 +1,44 @@
+---
+title: "Exploring diagnostics for SAE models"
+author: "Grayson White"
+date: "12/30/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+devtools::load_all()
+library(tidyverse)
+library(sae)
+library(hbsae)
+```
+
+```{r}
+area_dat <- ggsae::area_dat
+sae_mod_area <- sae::eblupFH(formula = area_dat$BA_TPA_ADJ ~ area_dat$tcc + area_dat$elev,
+                             vardir = area_dat$var_BA_TPA_ADJ)
+
+fitted <- sae_mod_area$eblup[,1]
+truth <- area_dat$BA_TPA_ADJ
+areas <- area_dat$COUNTYFIPS
+resid <- truth - fitted
+
+diagnostic_dat <- data.frame(fitted = fitted,
+                             resid = resid,
+                             areas = areas,
+                             direct_est = truth)
+```
+
+```{r}
+diagnostic_dat %>%
+  ggplot(aes(x = fitted,
+             y = resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red")
+```
+
+
+
