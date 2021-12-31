@@ -1,12 +1,13 @@
 Package: ggsae
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Diagnostic Plots for Small Area Estimation Models
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(
+  person("Grayson", "White", email = "graysonwhite13@gmail.com", role = c("cre", "aut"))
+  )
+Description: Produces diagnostice plots for small area estimation models for a 
+    variety of packages such as `sae`, `hbsae`, etc.
+License: CC0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
